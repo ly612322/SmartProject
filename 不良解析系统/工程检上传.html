@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <div class="item item-1"></div>
+        <div class="item item-2">
+            <img id="showImg" src="" width="100%" height="100%" onerror="this.src='./CSS/space.png'"> </div>
+        <!-- <img id="showImg" src="" width="533px" height="300px" onerror="this.src='space.png'"/> </div> -->
+        <div class="item item-3">
+            <div>
+                <a href="javascript:;" class="file">选择图片
+                    <input type="file" name="file" id="inputFile" multiple webkitdirectory>
+                </a>
+            </div>
+            <div>
+                图片数：<span id="picNum"></span>
+            </div>
+            <input class="item-btn" type="button" id="reset" value="清空">
+            <div>
+                <input class="item-btn" type="button" value="上一张" id="upImg">
+            </div>
+            <div>
+                <input class="item-btn" type="button" value="下一张" id="downImg">
+            </div>
+            <form name="queryForm" id="queryForm">
+                <div>
+                    <div> <span>工段</span></div>
+                    <select class="item-select" name="工段" id="selectSeat" required>
+                        <option value=""></option>
+                        <option value="D">D</option>
+                        <option value="G">G</option>
+                        <option value="A">A</option>
+                        <option value="K">K</option>
+                    </select>
+                </div>
+                <div>
+                    <div> <span>快捷键</span></div>
+                    <input class="item-text" type="text" id="quickBtn" autocomplete="off">
+                </div>
+                <!-- <div>
+                    <div> <span>不良模式</span></div>
+                    <select class="item-select" name="不良模式" id="badKind" required>
+
+                    </select>
+                </div> -->
+                <div>
+                    <div> <span>备注</span></div>
+                    <input class="item-text" type="text" name="备注" id="remark">
+                </div>
+                <div>
+                    <input class="item-btn" type="submit" value="上传" id="update" style="margin-top: 15px">
+                </div>
+                <div style="width: 80px">
+                    <span id="uploadState"></span>
+                </div>
+        </div>
+        <div class="item item-4">
+            <div class="input-group" style="width: 300px">
+                <span class="span-name">File</span>
+                <input class="input-item" type="text" name="FILE_NAME" id="File_Name" style="width:68%">
+            </div>
+            <div class="input-group">
+                <span class="span-name">SHEET</span>
+                <input class="input-item" id="Sheet_Name" type="text" name="SHEET">
+            </div>
+            <div class="input-group">
+                <span class="span-name">LOT</span>
+                <input class="input-item" id="Lot_Name" type="text" name="LOT">
+            </div>
+            <div class="input-group">
+                <span class="span-name">PANEL</span>
+                <input class="input-item" id="Panel_Name" type="text" name="PANEL">
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+<link rel="stylesheet" href="./CSS/工程检上传.css">
+<script>
+        document.write("<s"+"cript type='text/javascript' src='./JS/工程检上传.js?"+Math.random()+"'></scr"+"ipt>");
+</script>
+<!-- <script src="./JS/工程检上传.js"></script> -->
+
+</html>

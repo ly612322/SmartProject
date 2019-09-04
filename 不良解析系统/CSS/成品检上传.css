@@ -1,0 +1,255 @@
+@media screen and (max-width: 1366px) { 
+    html {
+        zoom:0.90
+      }
+    } 
+    @media screen and (max-width: 1200px) { 
+        html {
+            zoom: .75
+          }
+        } 
+body{
+    margin: 0
+}
+table,
+td,
+th {
+    border: 1px;
+    border-style: solid;
+    border-color: #B0B0B0;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 0px;
+    z-index: 1;
+}
+
+thead,
+td {
+    vertical-align: middle;
+    overflow: hidden;
+    word-break: keep-all;
+    height: 80px;
+    
+}
+
+thead {
+    width: 0px;
+    background-color: #696969;
+    color: white;
+    overflow: hidden;
+    height: 18px;
+}
+.container{
+    display: grid;
+    grid-template-columns:repeat(12,133px);
+    grid-template-rows: 60px 680px;
+}
+.item1{
+    grid-column: 1/3;
+    justify-items: center;
+    align-items: center;
+}
+.item2{
+    grid-column-start: 1;
+    grid-column-end: 13;
+    background-color: rgb(238, 238, 238);
+    height: 690px;
+    overflow: auto;
+}
+.item3{
+    grid-column: 3/4;
+    justify-items: center;
+    align-items: center;
+}
+.input-group {
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 15px 12px;
+    border-radius: 3px;
+    position: relative;
+    display: inline-block;
+    border-collapse: separate;
+}
+
+.span-name {
+    float: left;
+    padding: 2px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 2;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+.input-item {
+    float: left;
+    width: 50%;
+    height: 28px;
+    padding: 6px 12px;
+    margin-left: -3px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0 4px 4px 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.item-btn {
+    width: 100px;
+    color: #fff;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    border: 1px solid transparent;
+    border-radius: 4px
+}
+
+.btn-small {
+    width: 80px;
+}
+
+.item-select {
+    width: 170px;
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.item-inline-select {
+    float: left;
+    width: 170px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-left: -2px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0 4px 4px 0;
+}
+
+.item-text {
+    width: 145px;
+    display: block;
+    height: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.file {
+    width: 100px;
+    height: 23px;
+    font-size: 15px;
+    position: relative;
+    display: inline-block;
+    background: #337ab7;
+    border: 1px solid #337ab7;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #ffffff;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+.file input {
+    position: absolute;
+    right: 5px;
+    opacity: 0;
+}
+.file:hover {
+    background: rgb(0, 113, 179);
+    border-color: #78C3F3;
+    color: #ffffff;
+    text-decoration: none;
+}
+.um_picture{
+    height: 100%;
+    width: 100%;
+   }  
+#select_品名简称{
+    height: 100%;
+    border: 0px solid white;
+}
+#select_分责{
+    height: 100%;
+    border: 0px solid white;
+}
+#select_模式{
+    height: 100%;
+    border: 0px solid white;
+}
+.BigImg{
+    display: none;
+    position: absolute;
+    left: 70px;
+    top: 125px;
+    width: 41%;
+    height: 72%;
+}
+#BigImgSrc{
+    height: auto;
+    width: 41%;
+    position: fixed;
+    z-index: 2;
+}
+.uploadbtn{
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 18px;
+    background-color:   #337ab7;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.deletebtn{
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 18px;
+    background-color:#CD5555;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}

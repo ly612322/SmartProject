@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./CSS/style.css">
+
+    <link href="../JS/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../LIB/bootstrap-3.3.7-dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../LIB/bootstrap-3.3.7-dist/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../LIB/bootstrap-3.3.7-dist/css/bootstrap-table-fixed-columns.css">
+    <link href="../LIB/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../JS/jquery.js"></script>
+    <script src="../LIB/bootstrap-3.3.7-dist/js/bootstrap-select.min.js"></script>
+    <script src="../LIB/bootstrap-3.3.7-dist/js/bootstrap-table.min.js"></script>
+    <script src="../LIB/bootstrap-3.3.7-dist/js/bootstrap-table-fixed-columns.js"></script>
+    <script src="../LIB/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container pull-left" style="width:100%;margin: 5px 2px">
+        <div class="form-inline" style="margin: 2px 0 15px -15px;">
+            <div class="input-group" style="margin-top: 5px;">
+                <span class="input-group-addon" style="width: 51px">开始日期:</span>
+                <input type="date" class="form-control" id="input_开始" placeholder="">
+            </div>
+            <div class="input-group" style="margin-top: 5px;">
+                <span class="input-group-addon" style="width: 51px">结束日期:</span>
+                <input type="date" class="form-control" id="input_结束" placeholder="">
+            </div>
+            <div class="input-group" style="margin-top: 5px;width: 12%;">
+                <span class="input-group-addon" style="width: 51px">LOT:</span>
+                <input type="text" class="form-control" id="input_LOT" placeholder="">
+            </div>
+            <div class="input-group" style="margin-top: 5px;width: 12%;">
+                <span class="input-group-addon" style="width: 51px">品名:</span>
+                <input type="text" class="form-control" id="input_品名" placeholder="">
+            </div>
+            <div class="input-group" style="margin-top: 5px;width: 12%;">
+                <span class="input-group-addon" style="width: 51px">工段:</span>
+                <select id="select_工段" class="selectpicker" style="width: 53%;height: 43px;margin-left: 5px">
+                    <option value=""></option>
+                    <option value="G">G</option>
+                    <option value="D">D</option>
+                    <option value="K">K</option>
+                    <option value="A">A</option>
+                </select> </div>
+            <div class="input-group" style="margin-top: 5px;width: 21%;">
+                <span class="input-group-addon" style="width: 51px">不良模式:</span>
+                <select id="select_不良模式" class="selectpicker" style="width: 100%;height: 34px;">
+                </select> </div>
+            <button type="button" class="btn btn-primary" onclick="查询()"><span class="glyphicon glyphicon-search"
+                    style="font-size: 16px;">查询</span></button>
+        </div>
+
+    </div>
+
+    <div id="dis_table">
+    </div>
+    <div id="dis_pic">
+        <img id="ftp_picture" src="" onmousewheel="return bigimg(this)" onerror="this.src='space.png';">
+    </div>
+    <div id="progressbar" role="progressbar" aria-valuemin="0" class="ui-progressbar ui-corner-all ui-widget ui-widget-content ui-progressbar-indeterminate">
+        <div class="ui-progressbar-value ui-corner-left ui-widget-header" style="width: 100%;">
+            <div class="ui-progressbar-overlay">
+            </div>
+        </div>
+    </div>
+    <div id="dis_re">
+        <div class="container pull-left" style="width:100%;margin: 5px 2px">
+            <div class="form-inline" style="margin: 2px 0 15px -15px;">
+
+                <div class="input-group" style="margin-top: 5px;width: 31%;">
+                    <span class="input-group-addon" style="width: 51px">LOT:</span>
+                    <input type="text" class="form-control" id="dis_LOT" placeholder="" disabled>
+                </div>
+                <div class="input-group" style="margin-top: 5px;width: 28%;">
+                    <span class="input-group-addon" style="width: 51px">SHEET:</span>
+                    <input type="text" class="form-control" id="dis_SHEET" placeholder="" disabled>
+                </div>
+                <div class="input-group" style="margin-top: 5px;width: 28%;">
+                    <span class="input-group-addon" style="width: 51px">PANEL:</span>
+                    <input type="text" class="form-control" id="dis_PANEL" placeholder="" disabled>
+                </div>
+
+            </div>
+            <div class="container pull-left" style="width:100%;margin: 5px 2px">
+                <div class="form-inline" style="margin: 2px 0 15px -32px;">
+                    <div class="input-group" style="margin-top: 5px;width: 31%;">
+                        <span class="input-group-addon" style="width: 51px">工号:</span>
+                        <input type="text" class="form-control" id="dis_工号" placeholder="" disabled>
+                    </div>
+                    <div class="input-group" style="margin-top: 5px;width: 26%;">
+                        <span class="input-group-addon" style="width: 51px">姓名:</span>
+                        <input type="text" class="form-control" id="dis_姓名" placeholder="" disabled>
+                    </div>
+                    <div class="input-group" style="margin-top: 5px;width: 41%;">
+                        <span class="input-group-addon" style="width: 51px">原不良模式:</span>
+                        <input type="text" class="form-control" id="old_不良模式" placeholder="" disabled>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container pull-left" style="width:100%;margin: 5px 2px">
+                <div class="form-inline" style="margin: 2px 0 15px -32px;">
+                    <h3 style="display:inline-block;margin-top: -10px">复判:</h3>
+                    <div class="input-group" style="margin-top: -4px;width: 38%;">
+                        <select id="re_select_不良模式" class="selectpicker" style="width: 100%;height: 34px;">
+                        </select> </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="上传()" style=" margin-left: 42px;width: 230px;"><span
+                    style="font-size: 16px;">确认</span></button>
+        </div>
+</body>
+<script src="./JS/工程检复判.js"></script>
+<script src="../LIB/AVIC1.js" type="text/javascript"></script>
+<script src="../JS/SS/SS.js" type="text/javascript"></script>
+
+</html>

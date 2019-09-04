@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="item1">
+            <div class="input-group">
+                <span class="span-name">来源</span>
+                <select class="item-inline-select" name="来源" id="selectFrom">
+                    <option value=""></option>
+                    <option value="中试线-量产">中试线-量产</option>
+                    <option value="中试线-实验">中试线-实验</option>
+                    <option value="中试线-摩擦辊验证">中试线-摩擦辊验证</option>
+                    <option value="P检">P检</option>
+                    <option value="M检">M检</option>
+                    <option value="VI检">VI检</option>
+                    <option value="上海天马">上海天马</option>
+                    <option value="深圳天马">深圳天马</option>
+                    <option value="厦门天马">厦门天马</option>
+                    <option value="武汉天马">武汉天马</option>
+                    <option value="客诉">客诉</option>
+                    <option value="新品">新品</option>
+                    <option value="德普特">德普特</option>
+                    <option value="RA失效">RA失效</option>
+                </select>
+            </div>
+        </div>
+        <div class="item3">
+            <div class="input-group">
+                <a href="javascript:;" class="file">选择文件夹
+                    <input type="file" name="file" id="inputFile" multiple webkitdirectory>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="input-group">
+                <input class="item-btn" type="button" value="一键上传" id="oneKey" style="margin-left: 10px" >
+            </div>
+        </div>
+        <div class="input-group">
+            <input class="item-btn btn-small" type="button" id="reset" value="清空">
+
+        </div>
+        <div class="item2">
+
+        </div>
+    </div>
+    <div class="BigImg">
+        <img id="BigImgSrc" src="" onmousewheel="return bigimg(this)">
+    </div>
+</body>
+<link rel="stylesheet" href="./CSS/成品检上传.css">
+<script>
+    document.write("<s"+"cript type='text/javascript' src='./JS/成品检上传.js?"+Math.random()+"'></scr"+"ipt>");
+</script>
+<!-- <script src="./JS/成品检上传.js"></script> -->
+
+</html>
