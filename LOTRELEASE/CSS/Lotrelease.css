@@ -43,36 +43,6 @@ th {
     background-color: rgb(228, 228, 228);
 }
 
-/* Border styles */
-/* #tb thead, #tb tr {
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-top-color: rgba(255, 255, 255, 0.452);
-    }
-    #tb {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: rgba(255, 255, 255, 0.37);
-    } */
-
-/* Padding and font style */
-/* #tb td, #tb th { */
-/* padding: 5px 10px; */
-/* font-size: 16px;
-    font-family: Verdana;
-    color: rgb(83, 83, 83);
-    } */
-
-/* Alternating background colors */
-/* #tb tr:nth-child(even) {
-    background: rgba(209, 209, 209, 0.507)
-    }
-    #tb tr:nth-child(odd) {
-    background: #FFF
-    } */
-
-
-
 .container1 {
     position: fixed;
     width: 100%;
@@ -146,7 +116,7 @@ th {
 }
 .input-group {
     float: left;
-    width: 240px;
+    width: 16%;
     height: 30px;
     font-size: 12px;
     line-height: 1.5;
@@ -158,7 +128,7 @@ th {
 
 .span-name {
     float: left;
-    padding: 6px 12px;
+    padding: 6px;
     font-size: 14px;
     font-weight: 400;
     line-height: 2;
@@ -171,9 +141,9 @@ th {
 
 .input-item {
     float: left;
-    width: 50%;
+    width: 59%;
     height: 28px;
-    padding: 6px 12px;
+    padding: 6px;
     margin-left: -3px;
     font-size: 14px;
     line-height: 1.4;
@@ -186,9 +156,9 @@ th {
 }
 
 .item-btn {
-    width: 65px;
+    width: 22%;
     color: #fff;
-    padding: 6px 12px;
+    padding: 6px;
     margin:12px 6px 12px 30px;
     margin-bottom: 0;
     font-size: 16px;
@@ -223,8 +193,7 @@ th {
 }
 
 .item-select {
-    width: 145px;
-    display: block;
+    width: 66%;
     height: 42px;
     margin-left: -2px;
     /* padding: 6px 12px; */
@@ -239,7 +208,8 @@ th {
 }
 .btn-group{
     float: right;
-    margin-right: 10px
+    margin-right: 10px;
+    width: 15%;
 }
 .item-text {
     width: 145px;
