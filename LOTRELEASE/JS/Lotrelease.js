@@ -82,12 +82,14 @@ class LotRelease {
         event.preventDefault();
         this.progressbar.style.display = 'block';
         this.displatyTable.innerHTML = '';
+        this.clonetable.innerHTML = '';
         // this.clonetable.innerHTML = '';
         let ajax = new XMLHttpRequest;
         let formData = new FormData(this.queryform);
         ajax.open("post", "../API/LOT RELEASE/LOTRELEASE_LOT发生率.py", true);
         ajax.send(formData);
         ajax.onload = () => {
+            this.clonetable.style.display = 'block';
             let response = JSON.parse(ajax.response);
             this.data = response.data;
             for (let key in this.data[0]) {
@@ -378,9 +380,9 @@ class LotRelease {
             let table1 = table.cloneNode(true);
             // this.clonecol.appendChild(table1);
             let table2 = table.cloneNode(true);
-            // this.clonetable.appendChild(table2);
-            // let tablewidth = this.clonetable.offsetWidth;
-            // this.displatyarea.style.width = tablewidth + 'px';
+            this.clonetable.appendChild(table2);
+            let tablewidth = this.clonetable.offsetWidth;
+            this.displatyarea.style.width = tablewidth + 'px';
             this.displatyTable.appendChild(table);
             this.progressbar.style.display = 'none';
         }

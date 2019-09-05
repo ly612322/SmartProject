@@ -91,6 +91,7 @@ th {
 }
 
 #clonethead {
+    display: none;
     margin: 0;
     height: 73px;
     /* z-index: 9; */
@@ -98,7 +99,7 @@ th {
     top: 100px;
     left: 0;
     overflow: hidden;
-    box-shadow: 2px -4px 18px 4px grey;
+    box-shadow: 2px -2px 8px 4px grey;
 
 }
 #clonecol{

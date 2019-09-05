@@ -40,6 +40,7 @@ class Product {
         this.base64toBlob = this.base64toBlob.bind(this);
         this.showpicture = this.showpicture.bind(this);
         this.queryname = this.queryname.bind(this);
+        this.find = this.find.bind(this);
 
         // 
         this.inputFile.addEventListener('change', this.selectFile);
@@ -94,31 +95,35 @@ class Product {
         });
 
         this.fileName.forEach(element => {
-            let td_简称 = element.slice(0, element.indexOf('-'));
+            let first = this.find(element, '-', 0);
+            let second = this.find(element, '-', 1);
+            let third = this.find(element, '-', 2);
+            let td_简称 = element.slice(0, first);
+            let td_不良 = element.slice(first + 1, second);
             let trtd = tbody.insertRow();
-            if (element.slice(td_简称.length + 4, td_简称.length + 5) == 0) { // 无LOT号
-                trtd.insertCell().innerHTML = element.slice(0, td_简称.length); //简称
+            if (element.slice(second + 1, third) == 0) { // 无LOT号
+                trtd.insertCell().innerHTML = td_简称; //简称
                 let um_select = document.createElement('select');
                 um_select.id = 'select_品名简称';
                 um_select.innerHTML = this.pmlist;
                 trtd.insertCell().appendChild(um_select);
-                trtd.insertCell().innerHTML = element.slice(td_简称.length + 1, td_简称.length + 3) //不良
+                trtd.insertCell().innerHTML = td_不良 //不良
                 trtd.insertCell().innerHTML = '0' //LOT
                 trtd.insertCell().innerHTML = '' //SHEET
                 trtd.insertCell().innerHTML = '' //PANEL
-                trtd.insertCell().innerHTML = element.slice(td_简称.length + 6, td_简称.length + 8) //PANEL状态
+                trtd.insertCell().innerHTML = element.slice(third + 1, third + 3) //PANEL状态
 
             } else {
-                trtd.insertCell().innerHTML = element.slice(0, td_简称.length); //简称
+                trtd.insertCell().innerHTML = td_简称; //简称
                 let um_select = document.createElement('select');
                 um_select.id = 'select_品名简称';
                 um_select.innerHTML = this.pmlist;
                 trtd.insertCell().appendChild(um_select);
-                trtd.insertCell().innerHTML = element.slice(td_简称.length + 1, td_简称.length + 3) //不良
-                trtd.insertCell().innerHTML = element.slice(td_简称.length + 4, td_简称.length + 12) //LOT
-                trtd.insertCell().innerHTML = element.slice(td_简称.length + 12, td_简称.length + 14) //SHEET
-                trtd.insertCell().innerHTML = element.slice(td_简称.length + 14, td_简称.length + 16) //PANEL
-                trtd.insertCell().innerHTML = element.slice(td_简称.length + 17, td_简称.length + 19) //PANEL状态
+                trtd.insertCell().innerHTML = td_不良; //不良
+                trtd.insertCell().innerHTML = element.slice(second + 1, second + 9); //LOT
+                trtd.insertCell().innerHTML = element.slice(second + 9, second + 11); //SHEET
+                trtd.insertCell().innerHTML = element.slice(second + 11, second + 13); //PANEL
+                trtd.insertCell().innerHTML = element.slice(third + 1, third + 3); //PANEL状态
             }
             let um_select1 = document.createElement('select');
             um_select1.id = 'select_模式';
@@ -338,11 +343,15 @@ class Product {
             let tableNoLot = table.rows[i].cells[0].innerHTML + '-' //表格内无LOT号 取到0
                 +
                 table.rows[i].cells[2].innerHTML + '-' +
-                table.rows[i].cells[3].innerHTML
+                table.rows[i].cells[3].innerHTML;
+
             for (let j = 0; j < this.newfiles.length; j++) { //循环筛选过的图片
-                let td_简称 = this.newfiles[j].name.slice(0, this.newfiles[j].name.indexOf('-'));
+                let first = this.find(this.newfiles[j].name, '-', 0);
+                let second = this.find(this.newfiles[j].name, '-', 1);
+                let third = this.find(this.newfiles[j].name, '-', 2);
+                let td_简称 = this.newfiles[j].name.slice(0, first);
                 if (this.newfiles[j].name.length < 22) { //图片名小于22认为无LOT号
-                    let LOTNO = this.newfiles[j].name.slice(0, td_简称.length + 5); //
+                    let LOTNO = this.newfiles[j].name.slice(0, second + 2); //     
                     if (LOTNO == tableNoLot) { //无LOT号图片上传
                         let reader = new FileReader();
                         reader.readAsDataURL(this.newfiles[j]);
@@ -361,7 +370,9 @@ class Product {
                     }
                 }
                 if (this.newfiles[j].name.length > 21) {
-                    let LotPanelS = this.newfiles[j].name.slice(td_简称.length + 1, td_简称.length + 19);
+                    // let LotPanelS = this.newfiles[j].name.slice(td_简称.length + 1, td_简称.length + 19);
+                    let LotPanelS= this.newfiles[j].name.slice(first+1, third + 3);
+                    console.log(LotPanelS);
                     if (tableLot == LotPanelS) {
                         let reader = new FileReader();
                         reader.readAsDataURL(this.newfiles[j]);
@@ -553,5 +564,14 @@ class Product {
             }
         }
     }
+    //查找字符串位置
+    find(str, cha, num) {
+        var x = str.indexOf(cha);
+        for (var i = 0; i < num; i++) {
+            x = str.indexOf(cha, x + 1);
+        }
+        return x;
+    }
+
 }
 new Product();
