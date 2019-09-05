@@ -16,6 +16,7 @@ class Product {
         this.offY = 60; //图片y
         this.UID = window.top.SS_UID; // 外层工号
         this.workname = '';
+        this.selectindex = '';
 
 
         //页面
@@ -41,6 +42,7 @@ class Product {
         this.showpicture = this.showpicture.bind(this);
         this.queryname = this.queryname.bind(this);
         this.find = this.find.bind(this);
+        this.inputpm = this.inputpm.bind(this);
 
         // 
         this.inputFile.addEventListener('change', this.selectFile);
@@ -333,7 +335,39 @@ class Product {
                     flag1 = element;
                 }
             });
+        Array.from(rows1).forEach((ele, index) => {
+            if (index == 0) {
+                return false
+            }
+            let tdpm = ele.childNodes[1];
+            let pm = ele.childNodes[1].childNodes[0];
+            let _ = true;
+            tdpm.onclick = () => {
+                if (!_) return;
+                if (pm.value == '') {
+                    if (this.selectindex != '') {
+                        let option = pm.options;
+                        option[this.selectindex].selected = true;
+                    }
+                }
+                _ = false;
+            }
+            pm.onchange = () => {
+                this.selectindex = pm.selectedIndex;
+            }
+        });
 
+        // Array.from(rows1).forEach((element, index) => {
+        //     if (index == 0) {
+        //         return false
+        //     }
+        //     let newpm = element.childNodes[1];
+        //     newpm.innerHTML = '';
+        //     let um_select = document.createElement('select');
+        //     um_select.id = 'select_品名简称';
+        //     um_select.innerHTML = this.pmlist;
+        //     newpm.appendChild(um_select);
+        // })
         //图片插入
         for (let i = 1; i <= [...this.fileName].length; i++) {
             let tableLot = table.rows[i].cells[2].innerHTML + '-' //表格内LOT+SHEET+PANEL
@@ -371,8 +405,7 @@ class Product {
                 }
                 if (this.newfiles[j].name.length > 21) {
                     // let LotPanelS = this.newfiles[j].name.slice(td_简称.length + 1, td_简称.length + 19);
-                    let LotPanelS= this.newfiles[j].name.slice(first+1, third + 3);
-                    console.log(LotPanelS);
+                    let LotPanelS = this.newfiles[j].name.slice(first + 1, third + 3);
                     if (tableLot == LotPanelS) {
                         let reader = new FileReader();
                         reader.readAsDataURL(this.newfiles[j]);
@@ -438,6 +471,7 @@ class Product {
             Array.from(Data).forEach(Element => {
                 this.pmlist = this.pmlist + `<option>${Element}</option>`;
             });
+
         }
     }
     //模式
@@ -571,6 +605,17 @@ class Product {
             x = str.indexOf(cha, x + 1);
         }
         return x;
+    }
+    //品名简称填入
+    inputpm() {
+        let tr = document.getElementsByTagName('tr');
+        let table = document.getElementById('tb');
+        for (let i = 0; i < tr.length - 1; i++) {
+            let tdpm = table.rows[i].cells[2];
+            tdpm.onclick = () => {
+                alert(1)
+            }
+        }
     }
 
 }

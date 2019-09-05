@@ -1,6 +1,6 @@
 class LotRelease {
     constructor() {
-        //表头数据
+        //表头
         this.arrTitle = ['型号', '面取数', 'LOT NO'];
         this.gpr = ['日期', '目标', '不良率', 'PR异物_G', '模糊G断_G'];
         this.gpvd = ['目标', '不良率', 'Sputter异物_G', '模糊G断_G'];
