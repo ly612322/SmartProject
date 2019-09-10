@@ -16,7 +16,8 @@ class Product {
         this.offY = 60; //图片y
         this.UID = window.top.SS_UID; // 外层工号
         this.workname = '';
-        this.selectindex = '';
+        this.pmindex = '';
+        this.badindex = '';
 
 
         //页面
@@ -68,6 +69,11 @@ class Product {
     }
 
     selectFile(event) {
+        if (this.fromPlace.value == '') {
+            alert('请选择来源');
+            window.location.reload();
+            return
+        }
         this.files = event.target.files;
         //表格制作
         this.arr_title = ["简称", "品名简称", "不良代码", "LOT", "SHEET", "PANEL", "PANEL状态", "不良模式", "分责", "上传", "删除", "图一", "图二", "图三", "图四", "图五", "图六", "备注"];
@@ -169,7 +175,6 @@ class Product {
                     let uploadImg = new Object();
                     this.uploadState = false;
                     let context = um_input2.parentNode.parentNode.childNodes;
-                    context[9].childNodes[0].value = '上传中...'
                     this.arr_title.forEach((element, index) => {
                         switch (index) {
                             case 1:
@@ -209,6 +214,7 @@ class Product {
                                 }
                                 case 17:
                                     uploadImg[element] = context[index].childNodes[0].value;
+                                    uploadImg[element] = uploadImg[element].replace(/^\s|&quot;|'$/, '').replace(/\n/g, '-').replace(/\r/g, '-').replace(/\t/g, '-').replace(/,/g, '，').replace(/\\/g, '/');
                                     break;
                                 default:
                                     uploadImg[element] = context[index].innerHTML;
@@ -217,6 +223,11 @@ class Product {
                     let formData = new FormData();
                     this.makeFormData(uploadImg, formData);
                     formData.set('来源', this.fromPlace.value);
+                    if (formData.get('品名简称') == '' || formData.get('不良模式') == '' || formData.get('分责') == '') {
+                        alert('请完善上传信息')
+                        return
+                    }
+                    context[9].childNodes[0].value = '上传中...'
                     let changeDate = new Date();
                     changeDate.setTime(changeDate.getTime());
                     let YEAR2 = changeDate.getFullYear();
@@ -341,19 +352,35 @@ class Product {
             }
             let tdpm = ele.childNodes[1];
             let pm = ele.childNodes[1].childNodes[0];
+            let tdkind = ele.childNodes[7];
+            let kind = ele.childNodes[7].childNodes[0];
             let _ = true;
+            let flag = true;
             tdpm.onclick = () => {
                 if (!_) return;
                 if (pm.value == '') {
-                    if (this.selectindex != '') {
+                    if (this.pmindex != '') {
                         let option = pm.options;
-                        option[this.selectindex].selected = true;
+                        option[this.pmindex].selected = true;
                     }
                 }
                 _ = false;
             }
             pm.onchange = () => {
-                this.selectindex = pm.selectedIndex;
+                this.pmindex = pm.selectedIndex;
+            }
+            tdkind.onclick = () => {
+                if (!flag) return;
+                if (kind.value == '') {
+                    if (this.badindex != '') {
+                        let option = kind.options;
+                        option[this.badindex].selected = true;
+                    }
+                }
+                flag = false
+            }
+            kind.onchange = () => {
+                this.badindex = kind.selectedIndex;
             }
         });
 

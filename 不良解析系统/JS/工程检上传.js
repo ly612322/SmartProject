@@ -3,8 +3,8 @@ class Project {
     this.index = 0; //图片切换
     this.tip = false;
     this.files = [];
-    this.lotName = '';//图片名字
-    this.pmName = '';//品名
+    this.lotName = ''; //图片名字
+    this.pmName = ''; //品名
     this.uploadImg = '';
     this.UID = window.top.SS_UID; // 外层工号
     this.workname = '';
@@ -34,6 +34,7 @@ class Project {
     this.resetImg = this.resetImg.bind(this);
     this.update = this.update.bind(this);
     this.queryname = this.queryname.bind(this);
+    this.compare = this.compare.bind(this);
 
     //事件
     this.selectPic.addEventListener("change", this.fileInput, false);
@@ -43,10 +44,10 @@ class Project {
     this.proSeat.addEventListener("change", this.selectSeat);
     this.shortcutKey.addEventListener("input", this.shortcut);
     this.queryform.addEventListener("submit", this.update);
-      window.addEventListener('load', this.queryname)
+    window.addEventListener('load', this.queryname)
 
   }
-
+  //用户信息查询
   queryname() {
     let ajax = new XMLHttpRequest();
     ajax.open("post", "/API/DFS/成品检_用户信息查询.py", true)
@@ -60,10 +61,10 @@ class Project {
       this.workname = response.data[0].姓名;
     }
   }
-  
+
   fileInput(event) {
     let inputfiles = event.target.files;
-    Array.from(inputfiles).forEach((element, index) => {
+    Array.from(inputfiles).forEach((element) => {
       //过滤非图片类型      
       if (element.type != "image/jpeg") {
         return;
@@ -71,6 +72,8 @@ class Project {
       this.files.push(element);
       // this.lotName.add(element.name.slice(0, 8));
     })
+    this.files = this.files.sort(this.compare('lastModifiedDate'))    
+    //展示第一张图片
     let reader = new FileReader();
     reader.readAsDataURL(this.files[0]);
     reader.onload = () => {
@@ -98,6 +101,7 @@ class Project {
     }
 
   }
+  //重置
   resetImg() {
     window.location.reload();
   }
@@ -188,6 +192,10 @@ class Project {
 
   update(event) {
     event.preventDefault();
+    if (this.shortcutKey.value == '') {
+      alert('请输入快捷键')
+      return
+    }
     let uploadState = document.getElementById('uploadState');
     if (this.files[this.index].name.slice(0, 8) == this.lotName) {
       let ajax = new XMLHttpRequest();
@@ -195,7 +203,7 @@ class Project {
       formData.append("Img", this.uploadImg);
       formData.set('FILE_NAME', this.files[this.index].name.replace('.Jpg', ''));
       formData.set('file_name', this.files[this.index].name);
-      formData.set('快捷键',this.shortcutKey.value);
+      formData.set('快捷键', this.shortcutKey.value);
       formData.set('品名', this.pmName);
       formData.set('工号', this.UID);
       formData.set('姓名', this.workname);
@@ -221,11 +229,9 @@ class Project {
         let response = JSON.parse(ajax.response);
         let state = response.state;
         uploadState.innerHTML = `${this.files[this.index].name}${state}`;
-        console.log(this.files[this.index].name);
         this.nextImg();
       }
-    }
-    else {
+    } else {
       this.lotName = this.files[this.index].name.slice(0, 8);
       let ajax1 = new XMLHttpRequest;
       ajax1.open("post", "../API/DFS/工程检上传_查品名.py", true);
@@ -244,7 +250,7 @@ class Project {
         formData.set('FILE_NAME', this.files[this.index].name.replace('.Jpg', ''));
         formData.set('file_name', this.files[this.index].name);
         formData.set('品名', this.pmName);
-        formData.set('快捷键',this.shortcutKey.value);
+        formData.set('快捷键', this.shortcutKey.value);
         formData.set('工号', this.UID);
         formData.set('姓名', this.workname);
         let changeDate = new Date();
@@ -269,10 +275,16 @@ class Project {
           let response = JSON.parse(ajax2.response);
           let state = response.state;
           uploadState.innerHTML = `${this.files[this.index].name}${state}`;
-          console.log(this.files[this.index].name);
           this.nextImg();
         }
       }
+    }
+  }
+  compare(property) {
+    return function (a, b) {
+      var value1 = a[property];
+      var value2 = b[property];
+      return value1 - value2;
     }
   }
 }

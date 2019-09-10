@@ -75,11 +75,14 @@ class LotRelease {
     }
 
     querytable(event) {
+        event.preventDefault();
         let inputdate = new Array();
         let badPatterns = new Array();
         let alldate = [];
         let target = [];
-        event.preventDefault();
+        this.pm = [];
+        this.lot = [];
+        this.mqs = [];
         this.progressbar.style.display = 'block';
         this.displatyTable.innerHTML = '';
         this.clonetable.innerHTML = '';
@@ -89,30 +92,30 @@ class LotRelease {
         ajax.open("post", "../API/LOT RELEASE/LOTRELEASE_LOT发生率.py", true);
         ajax.send(formData);
         ajax.onload = () => {
-            this.clonetable.style.display = 'block';
             let response = JSON.parse(ajax.response);
             this.data = response.data;
             for (let key in this.data[0]) {
                 badPatterns.push(key)
             }
-            for (let i = 0;i < badPatterns.length - 4;i++) {
+            for (let i = 0; i < badPatterns.length - 4; i++) {
                 let arr = [];
                 alldate.push(arr);
             }
             badPatterns = badPatterns.splice(4, badPatterns.length);
-            for (let i = 0;i < this.data.length;i++) {
+            for (let i = 0; i < this.data.length; i++) {
                 this.lot.push(this.data[i].LOT);
                 this.pm.push(this.data[i].品名);
                 this.mqs.push(parseInt(this.data[i].面取数));
                 inputdate.push((this.data[i].投入日期).slice(0, 10));
             }
-            for (let j = 0;j < badPatterns.length;j++) {
+            for (let j = 0; j < badPatterns.length; j++) {
                 let temp = alldate[j]
-                for (let i = 0;i < this.data.length;i++) {
+                for (let i = 0; i < this.data.length; i++) {
                     target.push('0.5%');
                     temp.push(this.data[i][Object.keys(this.data[i])[j + 4]])
                 }
             }
+
             target.length = alldate[0].length;
             alldate.unshift(inputdate, target)
             badPatterns.unshift('投入日期', '目标');
@@ -121,23 +124,24 @@ class LotRelease {
             table.id = 'tb';
             //开始三行
             let thead = table.createTHead();
-            for (let j = 0;j < 3;j++) {
+            for (let j = 0; j < 3; j++) {
                 let row = thead.insertRow();
                 let firsttd = document.createElement('td');
                 firsttd.setAttribute('colspan', '4');
                 firsttd.innerHTML = this.arrTitle[j];
                 row.appendChild(firsttd)
-                for (let i = 0;i < this.data.length;i++) {
+                for (let i = 0; i < this.data.length; i++) {
                     //开始三行数据
                     if (j == 2) {
                         let tdname = document.createElement('td');
-                        tdname.innerHTML = titledata[j][i];
+                        tdname.innerHTML = `<a href='#'>${titledata[j][i]}</a>`;
                         tdname.onclick = function () {
-                            alert(1)
+                            let html1 = 'Lot Instructions.html';
+                            html1 = html1 + '?' + tdname.childNodes[0].innerHTML;
+                            window.open(html1, 'newwindow', 'height=650, width=1120, top=100, left=200, toolbar=no, menubar=no,scrollbars=no, resizable=yes,location=no, status=no');
                         }
                         row.appendChild(tdname)
-                    }
-                    else {
+                    } else {
                         let tdname = document.createElement('td');
                         tdname.innerHTML = titledata[j][i];
                         row.appendChild(tdname)
@@ -160,10 +164,10 @@ class LotRelease {
             let row1 = tbody.insertRow();
             //G-PR
             // this.createtablespan(6, 'PR', row1);
-            for (let a = 0;a < badPatterns.length;a++) {
+            for (let a = 0; a < badPatterns.length; a++) {
                 let td = tbody.insertRow();
                 this.createtable(badPatterns[a], td);
-                for (let b = 0;b < this.data.length;b++) {
+                for (let b = 0; b < this.data.length; b++) {
                     this.createtable(alldate[a][b], td);
                 }
             }
@@ -183,40 +187,40 @@ class LotRelease {
             let row4 = tbody.insertRow();
             //D-PR
             this.createtablespan(7, 'PR', row4);
-            for (let a = 0;a < 6;a++) {
+            for (let a = 0; a < 6; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.dpr[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //D-PVD
             let row5 = tbody.insertRow();
             this.createtablespan(6, 'PVD', row5);
-            for (let c = 0;c < 5;c++) {
+            for (let c = 0; c < 5; c++) {
                 let td = tbody.insertRow();
                 this.createtable(this.dpvd[c], td);
-                for (let d = 0;d < 25;d++) {
+                for (let d = 0; d < 25; d++) {
                     this.createtable('', td);
                 }
             }
             //D-DET
             let row6 = tbody.insertRow();
             this.createtablespan(4, 'DET', row6);
-            for (let c = 0;c < 3;c++) {
+            for (let c = 0; c < 3; c++) {
                 let td = tbody.insertRow();
                 this.createtable(this.ddet[c], td);
-                for (let d = 0;d < 25;d++) {
+                for (let d = 0; d < 25; d++) {
                     this.createtable('', td);
                 }
             }
             //D-CVD
             let row7 = tbody.insertRow();
             this.createtablespan(4, 'CVD', row7);
-            for (let c = 0;c < 3;c++) {
+            for (let c = 0; c < 3; c++) {
                 let td = tbody.insertRow();
                 this.createtable(this.ddet[c], td);
-                for (let d = 0;d < 25;d++) {
+                for (let d = 0; d < 25; d++) {
                     this.createtable('', td);
                 }
             }
@@ -226,30 +230,30 @@ class LotRelease {
             //KPR
             let row11 = tbody.insertRow();
             this.createtablespan(6, 'KPR(5抽1)', row11);
-            for (let a = 0;a < 5;a++) {
+            for (let a = 0; a < 5; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.skpr[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //CPR
             let row12 = tbody.insertRow();
             this.createtablespan(5, 'CPR(8抽1)', row12);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.scpr[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //PIPR
             let row13 = tbody.insertRow();
             this.createtablespan(5, 'PIPR(5抽1)', row13);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.spipr[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
@@ -259,10 +263,10 @@ class LotRelease {
             this.createtablespan(9, 'F-Cell', row14);
             let row15 = tbody.insertRow();
             this.createtablespanColRow(8, 2, 'VI检(含框胶检/全检)', row15);
-            for (let a = 0;a < 7;a++) {
+            for (let a = 0; a < 7; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.vi[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
@@ -271,10 +275,10 @@ class LotRelease {
             this.createtablespan(11, '中试线', row16);
             let row17 = tbody.insertRow();
             this.createtablespanColRow(10, 2, 'VT(抽检)', row17);
-            for (let a = 0;a < 9;a++) {
+            for (let a = 0; a < 9; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.vt[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
@@ -285,40 +289,40 @@ class LotRelease {
             //上线良率
             let row19 = tbody.insertRow();
             this.createtablespanColRow(10, 2, '上线良率', row19);
-            for (let a = 0;a < 9;a++) {
+            for (let a = 0; a < 9; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.sxlv[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //ET2
             let row20 = tbody.insertRow();
             this.createtablespanColRow(5, 2, 'ET2', row20);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //Aging+ET3
             let row21 = tbody.insertRow();
             this.createtablespanColRow(5, 2, 'Aging+ET3', row21);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //OQC
             let row22 = tbody.insertRow();
             this.createtablespanColRow(5, 2, 'OQC', row22);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
@@ -329,61 +333,61 @@ class LotRelease {
             //sorting
             let row24 = tbody.insertRow();
             this.createtablespanColRow(5, 2, 'sorting', row24);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //线前(IOC)
             let row25 = tbody.insertRow();
             this.createtablespanColRow(5, 2, '线前(IOC)', row25);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //VLRR
             let row26 = tbody.insertRow();
             this.createtablespanColRow(5, 2, 'VLRR', row26);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //0KM(整机厂）
             let row27 = tbody.insertRow();
             this.createtablespanColRow(5, 2, '0KM(整机厂）', row27);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //Field reject
             let row28 = tbody.insertRow();
             this.createtablespanColRow(5, 2, 'Field reject', row28);
-            for (let a = 0;a < 4;a++) {
+            for (let a = 0; a < 4; a++) {
                 let td = tbody.insertRow();
                 this.createtable(this.et2[a], td);
-                for (let b = 0;b < 25;b++) {
+                for (let b = 0; b < 25; b++) {
                     this.createtable('', td);
                 }
             }
             //展示
+            this.clonetable.style.display = 'block';
+            this.clonetable.append(table);
             let table1 = table.cloneNode(true);
-            // this.clonecol.appendChild(table1);
-            let table2 = table.cloneNode(true);
-            this.clonetable.appendChild(table2);
+            this.displatyTable.appendChild(table1);
+            // this.clonetable.appendChild(table2);
             let tablewidth = this.clonetable.offsetWidth;
             this.displatyarea.style.width = tablewidth + 'px';
-            this.displatyTable.appendChild(table);
             this.progressbar.style.display = 'none';
         }
 
@@ -408,7 +412,7 @@ class LotRelease {
         rowname.appendChild(tdname);
     }
     reset() {
-        this.FormData.reset()
+        window.location.reload();
     }
     download() {
         $("#tb").table2excel({
