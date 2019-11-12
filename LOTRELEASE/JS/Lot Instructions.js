@@ -1,4 +1,4 @@
-class LotRelease {
+class lotrelease {
     constructor() {
         this.data = []
         this.query = this.query.bind(this)
@@ -21,13 +21,14 @@ class LotRelease {
         ajax.onload = () => {
             let response = JSON.parse(ajax.response);
             this.data = response.data;
-            if(this.data.length == 0){
+            if (this.data.length == 0) {
                 document.write('暂无数据')
                 return
             }
             console.log(this.data);
             let table = document.createElement("table");
             table.style.width = '1100px';
+            table.id = "tb";
             let th = table.insertRow();
             this.data.forEach((object, index) => {
                 var row = table.insertRow();
@@ -46,4 +47,4 @@ class LotRelease {
         }
     }
 }
-new LotRelease()
+new lotrelease()

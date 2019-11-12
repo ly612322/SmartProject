@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container1">
+        <form name="formdata" id='formdata'>
+            <div class="condiv">
+                <span class="title">
+                    LOT RELEASE
+                </span>
+            </div>
+            <div class="input-group">
+                <span class="span-name">开始时间</span>
+                <input class="input-item" type="text" name="开始日期" id="startTime" required>
+            </div>
+            <div class="input-group">
+                <span class="span-name">结束时间</span>
+                <input class="input-item" type="text" name="结束日期" id="endTime" required>
+            </div>
+            <div class="input-group">
+                <span class="span-name">LOT NO</span>
+                <input class="input-item" type="text" name="LOT" id="lotNo">
+            </div>
+            <div class="input-group">
+                <span class="span-name">工段</span>
+                <select class="item-select" type="text" name="工段" id="stage">
+                    <option value=""></option>
+                    <!-- <option value="A">A</option>
+                    <option value="D">D</option> -->
+                    <option value="G">G</option>
+                    <!-- <option value="K">K</option> -->
+                </select>
+            </div>
+            <div class="input-group">
+                <span class="span-name">不良模式</span>
+                <select class="item-select" type="text" name="不良模式" id="kind">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="btn-group">
+                <input type="submit" value="查询" class="item-btn" id="submitbtn">
+                <input type="button" value="重置" class="item-btn btn-reset" id="resetbtn">
+                <input type="button" value="下载" class="item-btn btn-download" id="download">
+            </div>
+        </form>
+    </div>
+    <div class="container3"></div>
+    <div class="container2">
+        <div id="clonethead">
+
+        </div>
+        <!-- <div id="clonecol">
+
+        </div> -->
+        <div id="displayTable">
+
+        </div>
+    </div>
+    <div id="progressbar" class="load-container load">
+        <div class="loader"></div>
+    </div>
+</body>
+<link rel="stylesheet" href="./CSS/Lotrelease.css">
+<script src="../../JS/jquery.js" type="text/javascript"></script>
+<script src="JS/laydate.js"></script>
+<script src="./JS/Lotrelease.js"></script>
+<script src="../../JS/tabletoexcel.js" type="text/javascript"></script>
+<!-- <script>
+    document.write("<s" + "cript type='text/javascript' src='./JS/Lotrelease.js?" + Math.random() + "'></scr" + "ipt>");
+</script> -->
+<script>
+    laydate.render({
+        elem: '#startTime' //指定元素
+    });
+    laydate.render({
+        elem: '#endTime' //指定元素
+    });
+</script>
+
+</html>

@@ -1,81 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>Document</title>
+    <link rel="stylesheet" href="./CSS/Lotrelease.css">
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="JS/laydate.js"></script>
+    <script src="./JS/tabletoexcel.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <div class="container1">
+    <div id="div_条件" style="top:1px;">
+        <div class="item_title">LOT RELEASE</div>
         <form name="formdata" id='formdata'>
-            <div class="condiv">
-                <span class="title">
-                    LOT RELEASE
-                </span>
+            <div class="item_cell">开始日期</div>
+            <div>
+                <input class="item_input" type="text" name="开始日期" id="startTime" autocomplete="off" required>
             </div>
-            <div class="input-group">
-                <span class="span-name">开始时间</span>
-                <input class="input-item" type="text" name="开始日期" id="startTime">
+            <div class="item_cell">结束日期</div>
+            <div>
+                <input class="item_input" type="text" name="结束日期" id="endTime" autocomplete="off" required>
             </div>
-            <div class="input-group">
-                <span class="span-name">结束时间</span>
-                <input class="input-item" type="text" name="结束日期" id="endTime">
+            <div class="item_cell">LOT</div>
+            <div>
+                <input class="item_input" type="text" name="LOT" id="lotNo" autocomplete="off">
             </div>
-            <div class="input-group">
-                <span class="span-name">LOT NO</span>
-                <input class="input-item" type="text" name="LOT" id="lotNo">
-            </div>
-            <div class="input-group">
-                <span class="span-name">工段</span>
-                <select class="item-select" type="text" name="工段" id="stage">
+            <div>
+                <div class="item_cell">工段</div>
+                <select class="item_input" type="text" name="工段" id="stage" autocomplete="off" required>
                     <option value=""></option>
-                    <!-- <option value="A">A</option>
-                    <option value="D">D</option> -->
                     <option value="G">G</option>
+                    <option value="D">D</option>
+                    <option value="中试线">中试线</option>
                     <!-- <option value="K">K</option> -->
                 </select>
             </div>
-            <div class="input-group">
-                <span class="span-name">不良模式</span>
-                <select class="item-select" type="text" name="不良模式" id="kind">
+            <!-- <div>
+                <div class="item_cell">不良模式</div>
+                <select class="item_input" type="text" name="不良模式" id="kind" autocomplete="off">
                     <option value=""></option>
                 </select>
-            </div>
-            <div class="btn-group">
-                <input type="submit" value="查询" class="item-btn" id="submitbtn">
-                <input type="button" value="重置" class="item-btn btn-reset" id="resetbtn">
-                <input type="button" value="下载" class="item-btn btn-download" id="download">
-            </div>
+            </div> -->
+            <input type="submit" value="查询" class="item_action" id="submitbtn"><br />
+            <!-- <input type="button" value="重置" class="item_action" id="resetbtn"><br /> -->
+            <input type="button" value="下载" class="item_action" id="download">
         </form>
     </div>
-    <div class="container3"></div>
-    <div class="container2">
-        <div id="clonethead">
 
-        </div>
-        <!-- <div id="clonecol">
-
-        </div> -->
-        <div id="displayTable">
-
+    <div id="div_展示">
+        <div class="container2">
+            <div id="clonethead">
+            </div>
+            <div id="displayTable">
+            </div>
         </div>
     </div>
     <div id="progressbar" class="load-container load">
         <div class="loader"></div>
     </div>
 </body>
-<link rel="stylesheet" href="./CSS/Lotrelease.css">
-<script src="../../JS/jquery.js" type="text/javascript"></script>
-<script src="JS/laydate.js"></script>
-<script src="../../JS/tabletoexcel.js" type="text/javascript"></script>
+
 <script src="./JS/Lotrelease.js"></script>
-<!-- <script>
-    document.write("<s" + "cript type='text/javascript' src='./JS/Lotrelease.js?" + Math.random() + "'></scr" + "ipt>");
-</script> -->
+
 <script>
     laydate.render({
         elem: '#startTime' //指定元素

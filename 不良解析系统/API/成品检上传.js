@@ -95,6 +95,7 @@ class Product {
             if (element.type != "image/jpeg") {
                 return;
             }
+
             if (element.name.slice(two + 1, three) == 0) {
                 this.fileName.add(element.name.slice(0, td_简称.length + 10))
             } else {

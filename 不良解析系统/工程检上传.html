@@ -53,7 +53,16 @@
                 </div> -->
                 <div>
                     <div> <span>备注</span></div>
-                    <input class="item-text" type="text" name="备注" id="remark">
+                    <select class="item-select" name="备注" id="remark">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="b">b</option>
+                        <option value="x">x</option>
+                    </select>
                 </div>
                 <div>
                     <input class="item-btn" type="submit" value="上传" id="update" style="margin-top: 15px">
@@ -68,12 +77,12 @@
                 <input class="input-item" type="text" name="FILE_NAME" id="File_Name" style="width:68%">
             </div>
             <div class="input-group">
-                <span class="span-name">SHEET</span>
-                <input class="input-item" id="Sheet_Name" type="text" name="SHEET">
-            </div>
-            <div class="input-group">
                 <span class="span-name">LOT</span>
                 <input class="input-item" id="Lot_Name" type="text" name="LOT">
+            </div>
+            <div class="input-group">
+                <span class="span-name">SHEET</span>
+                <input class="input-item" id="Sheet_Name" type="text" name="SHEET">
             </div>
             <div class="input-group">
                 <span class="span-name">PANEL</span>
@@ -85,7 +94,7 @@
 </body>
 <link rel="stylesheet" href="./CSS/工程检上传.css">
 <script>
-        document.write("<s"+"cript type='text/javascript' src='./JS/工程检上传.js?"+Math.random()+"'></scr"+"ipt>");
+    document.write("<s" + "cript type='text/javascript' src='./JS/工程检上传.js?" + Math.random() + "'></scr" + "ipt>");
 </script>
 <!-- <script src="./JS/工程检上传.js"></script> -->
 

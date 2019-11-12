@@ -3,20 +3,41 @@ body {
     padding: 0
 }
 
-table,
-td,
-th {
+#tb table,
+#tb td,
+#tb th {
     border: 1px;
     border-style: solid;
     border-color: rgb(175, 175, 175);
     color: rgb(78, 78, 78);
-    border-collapse: collapse;
-
 }
 
+#tb {
+    max-width: 1800px;
+}
+
+input {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    border: 0px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+
+select {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    border: 0px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
 
 table {
-    /* width: 1800px; */
+    /* max-width:1800px; */
     text-align: center;
     border-collapse: collapse;
     margin: 0px;
@@ -30,16 +51,16 @@ td {
     overflow: hidden;
     word-break: keep-all;
     text-overflow: ellipsis;
-    white-space: normal;
+    white-space: nowrap;
 }
 
-thead {
+#tb thead {
     background-color: rgb(242, 249, 255);
     color: rgb(0, 0, 0);
     overflow: hidden
 }
 
-th {
+#tb th {
     background-color: rgb(228, 228, 228);
 }
 
@@ -55,54 +76,37 @@ th {
 }
 
 .container2 {
-    height: 740px;
-    overflow: scroll;
+    height: 900px;
+    /* overflow: scroll; */
     overflow-x: hidden
 }
 
 .container3 {
     position: fixed;
-    top: 92px;
+    
     width: 100%;
     height: 8px;
     background-color: rgb(255, 255, 255);
     z-index: 999;
 }
 
-.condiv {
-    width: 100%;
-    height: 30px;
-    background-color: rgb(0, 124, 207);
-}
-
-.title {
-    color: white;
-    margin: auto;
-    line-height: 30px;
-    margin-left: 45%
-}
 
 #displayTable {
-    /* width: 1500px; */
-    margin-top: 100px;
-    /* position: absolute; */
     height: 640px;
-
 }
 
 #clonethead {
     display: none;
     margin: 0;
-    height: 9.8%;
+    height: 115px;
     /* z-index: 9; */
     position: absolute;
-    top: 100px;
     left: 0;
     overflow: hidden;
     box-shadow: 2px -2px 8px 4px grey;
-
 }
-#clonecol{
+
+#clonecol {
     margin: 0;
     height: 700px;
     width: 395px;
@@ -115,6 +119,7 @@ th {
     background-color: rgb(255, 255, 255);
 
 }
+/* 
 .input-group {
     float: left;
     width: 16%;
@@ -142,7 +147,7 @@ th {
 
 .input-item {
     float: left;
-    width: 59%;
+    width: 47%;
     height: 28px;
     padding: 6px;
     margin-left: -3px;
@@ -160,7 +165,7 @@ th {
     width: 22%;
     color: #fff;
     padding: 6px;
-    margin:12px 6px 12px 30px;
+    margin: 12px 6px 12px 8px;
     margin-bottom: 0;
     font-size: 16px;
     font-weight: 400;
@@ -194,10 +199,10 @@ th {
 }
 
 .item-select {
-    width: 66%;
+    width: 57%;
     height: 42px;
     margin-left: -2px;
-    /* padding: 6px 12px; */
+    padding: 6px 12px;
     margin-bottom: 13px;
     font-size: 14px;
     line-height: 1.4;
@@ -207,11 +212,12 @@ th {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-.btn-group{
+
+.btn-group {
     float: right;
-    margin-right: 10px;
-    width: 15%;
+    width: 14%;
 }
+
 .item-text {
     width: 145px;
     display: block;
@@ -225,7 +231,7 @@ th {
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
+} */
 
 .load-container {
     display: none;
@@ -234,7 +240,7 @@ th {
     float: left;
     position: absolute;
     top: 40%;
-    left: 40%;
+    left: 45%;
     overflow: hidden;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -277,4 +283,64 @@ th {
         transform: rotate(360deg);
         box-shadow: -0.11em -0.83em 0 -0.4em #0787dd, -0.11em -0.83em 0 -0.42em #0787dd, -0.11em -0.83em 0 -0.44em #0787dd, -0.11em -0.83em 0 -0.46em #0787dd, -0.11em -0.83em 0 -0.477em #0787dd;
     }
+}
+
+.item_cell {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.item_title {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: rgb(50, 50, 50);
+    color: white;
+}
+
+
+.item_action {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: rgb(50, 50, 100);
+    color: white;
+    margin: 3px 0px 0px 0px;
+    font-size: 15 px;
+
+}
+
+.item_action:hover {
+    background-color: rgb(0, 183, 255);
+
+}
+
+.item_input1 {
+    border-top: 1px solid rgb(192, 184, 184);
+}
+
+#div_条件 {
+    position: absolute;
+    left: 2px;
+    width: 200px;
+    border: 1px;
+    border-style: solid;
+    height: auto;
+    background-color: rgb(200, 200, 200);
+    border-radius: 5px;
+    top: 0px;
+}
+
+#div_展示 {
+    position: absolute;
+    left: 205px;
+    /* min-width: 1100px; */
+
+    /* background-color: rgb(200, 200, 200); */
+
+
 }

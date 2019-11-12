@@ -218,12 +218,16 @@ thead {
     top: 125px;
     width: 41%;
     height: 72%;
+    z-index: 999;
 }
 #BigImgSrc{
+    position: absolute;
     height: auto;
-    width: 41%;
+    width: 600px;
     position: fixed;
-    z-index: 2;
+    left: 215px;
+    top: 60px;
+    z-index: 2
 }
 .uploadbtn{
     display: inline-block;

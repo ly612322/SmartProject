@@ -35,6 +35,7 @@ class Project {
     this.update = this.update.bind(this);
     this.queryname = this.queryname.bind(this);
     this.compare = this.compare.bind(this);
+    this.remarkselect = this.remarkselect.bind(this);
 
     //事件
     this.selectPic.addEventListener("change", this.fileInput, false);
@@ -44,6 +45,7 @@ class Project {
     this.proSeat.addEventListener("change", this.selectSeat);
     this.shortcutKey.addEventListener("input", this.shortcut);
     this.queryform.addEventListener("submit", this.update);
+    this.remark.addEventListener("change", this.remarkselect)
     window.addEventListener('load', this.queryname)
 
   }
@@ -63,6 +65,12 @@ class Project {
   }
 
   fileInput(event) {
+    if (this.files.length > 0) {
+      let a = confirm('请清空图片后再选择文件夹')
+      if (a) {
+        window.location.reload()
+      }
+    }
     let inputfiles = event.target.files;
     Array.from(inputfiles).forEach((element) => {
       //过滤非图片类型      
@@ -70,9 +78,17 @@ class Project {
         return;
       }
       this.files.push(element);
+      console.log(this.files);
       // this.lotName.add(element.name.slice(0, 8));
     })
-    this.files = this.files.sort(this.compare('lastModifiedDate'))    
+    this.files = this.files.sort((a, b) => {
+      if (a.name.slice(0, 12) > b.name.slice(0, 12)) {
+        return 1
+      } else if (a.name.slice(0, 12) < b.name.slice(0, 12)) {
+        return -1
+      } else {}
+      return 0
+    }) // 最后修改时间排序
     //展示第一张图片
     let reader = new FileReader();
     reader.readAsDataURL(this.files[0]);
@@ -81,9 +97,14 @@ class Project {
       this.displayImg.src = firstpic;
       this.uploadImg = this.files[0];
       this.File_Name.value = this.files[0].name;
+      console.log(this.files[0].name.length);
       this.Lot_Name.value = this.files[0].name.slice(0, 8);
       this.Sheet_Name.value = this.files[0].name.slice(8, 10);
-      this.Panel_Name.value = this.files[0].name.slice(10, 12);
+      if (this.files[0].name.length == 27) {
+        this.Panel_Name.value = this.files[0].name.slice(10, 12);
+      } else {
+        this.Panel_Name.value = this.files[0].name.slice(11, 13);
+      }
       this.picNum.innerHTML = 1 + "/" + this.files.length;
     }
     this.lotName = this.files[0].name.slice(0, 8);
@@ -124,7 +145,11 @@ class Project {
       this.File_Name.value = this.files[this.index].name;
       this.Lot_Name.value = this.files[this.index].name.slice(0, 8);
       this.Sheet_Name.value = this.files[this.index].name.slice(8, 10);
-      this.Panel_Name.value = this.files[this.index].name.slice(10, 12);
+      if (this.files[this.index].name.length == 27) {
+        this.Panel_Name.value = this.files[this.index].name.slice(10, 12);
+      } else {
+        this.Panel_Name.value = this.files[this.index].name.slice(11, 13);
+      }
       this.picNum.innerHTML = this.index + 1 + "/" + this.files.length;
     }
   }
@@ -144,10 +169,15 @@ class Project {
       this.File_Name.value = this.files[this.index].name;
       this.Lot_Name.value = this.files[this.index].name.slice(0, 8);
       this.Sheet_Name.value = this.files[this.index].name.slice(8, 10);
-      this.Panel_Name.value = this.files[this.index].name.slice(10, 12);
+      if (this.files[this.index].name.length == 27) {
+        this.Panel_Name.value = this.files[this.index].name.slice(10, 12);
+      } else {
+        this.Panel_Name.value = this.files[this.index].name.slice(11, 13);
+      }
       this.picNum.innerHTML = this.index + 1 + "/" + this.files.length;
       this.shortcutKey.focus();
       this.shortcutKey.select();
+      this.shortcutKey.value = "";
       this.remark.value = '';
     }
   }
@@ -228,8 +258,16 @@ class Project {
       ajax.onload = () => {
         let response = JSON.parse(ajax.response);
         let state = response.state;
-        uploadState.innerHTML = `${this.files[this.index].name}${state}`;
-        this.nextImg();
+        if (state == "未上传成功！") {
+          this.shortcutKey.value = "";
+          this.shortcutKey.focus();
+          this.shortcutKey.select();
+          alert("未上传成功！请重新上传~")
+          return
+        } else {
+          uploadState.innerHTML = `${this.files[this.index].name}${state}`;
+          this.nextImg();
+        }
       }
     } else {
       this.lotName = this.files[this.index].name.slice(0, 8);
@@ -274,8 +312,16 @@ class Project {
         ajax2.onload = () => {
           let response = JSON.parse(ajax2.response);
           let state = response.state;
-          uploadState.innerHTML = `${this.files[this.index].name}${state}`;
-          this.nextImg();
+          if (state == "未上传成功！") {
+            this.shortcutKey.value = "";
+            this.shortcutKey.focus();
+            this.shortcutKey.select();
+            alert("未上传成功！请重新上传~")
+            return
+          } else {
+            uploadState.innerHTML = `${this.files[this.index].name}${state}`;
+            this.nextImg();
+          }
         }
       }
     }
@@ -286,6 +332,11 @@ class Project {
       var value2 = b[property];
       return value1 - value2;
     }
+  }
+  remarkselect() {
+    this.shortcutKey.focus();
+    this.shortcutKey.select();
+    this.shortcutKey.value = '';
   }
 }
 new Project();
